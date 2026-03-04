@@ -1,6 +1,8 @@
 import { pool } from "../../config/db";
 
-const createTodo = async (user_id: number, title: string) => {
+const createTodo = async (payLoad: Record<string, unknown>) => {
+  const { user_id, title } = payLoad;
+
   const result = await pool.query(
     `INSERT INTO todos(user_id, title) VALUES($1, $2) RETURNING *`,
     [user_id, title],
